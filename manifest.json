@@ -10,7 +10,7 @@
         "type": "image/png"
       }
     ],
-    "screenshot": [
+    "screenshots": [
         {
            "src": "captura 1.png", 
             "sizes": "640x960",
