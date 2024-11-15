@@ -22,7 +22,7 @@
             "type": "image/jpg",
             "form_factor": "wide"
         }
-    ]
+    ],
     "start_url": ".",
     "theme_color": "#3F51B5"
   }
