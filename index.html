@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <title> HTML </title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <link href="style.css" rel="stylesheet" />
+   <link rel="manifest" href="manifest.json">
+  </head>
+<style type="text/css">
+    table, tr, td {
+        border: 1px solid rgb(139, 0, 167);
+    }
+</style>
+    <body background="fondo.png">
+      <!-- Navigation-->
+      <nav class="navbar navbar-expand-lg navbar-light fixed-top shadow-sm" id="mainNav">
+        <div class="container px-5">
+            <a class="navbar-brand fw-bold" href="#page-top">Start Bootstrap</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                Menu
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ms-auto me-4 my-3 my-lg-0">
+                    <li class="nav-item installApp" style="cursor: pointer;"><a class="nav-link me-lg-3">Install</a></li>
+                    <li class="nav-item"><a class="nav-link me-lg-3" href="#features">Features</a></li>
+                    <li class="nav-item"><a class="nav-link me-lg-3" href="#download">Download</a></li>
+                </ul>
+                <button class="btn btn-primary rounded-pill px-3 mb-2 mb-lg-0" data-bs-toggle="modal" data-bs-target="#feedbackModal">
+                    <span class="d-flex align-items-center">
+                        <span class="small">Send Feedback</span>
+                    </span>
+                </button>
+            </div>
+        </div>
+    </nav>
+      <div style="display: flex; justify-content: center; align-items: center;">
+        <table class="table table-bordered">
+            <tr>
+                <td colspan="2" class="bg-info text-white"><h2>Elementos de HTML</h2></td>
+            </tr>
+            <tr>
+                <td>
+                    <input id="captura" type="text" class="form-control" placeholder="Escribe tu name" onkeypress="if (event.keyCode === 13) { agregarFila(); }">
+                </td>
+                <td>
+                    <input type="button" class="btn btn-primary" value="Agregar" onclick="agregarFila()">
+                </td>
+            </tr>
+        </table>
+    </div>
+    <center>
+        <table id="tabla">
+            <tr>
+                <td style="background-color: rgb(255, 255, 255)">Consecutivo</td>
+                <td style="background-color: rgb(238, 238, 238)">Nombre Alumno</td>
+            </tr>
+        </table>
+    </center>
+    
+    <script>
+let contador = 1;
+
+
+function agregarFila() {
+  let nombre = document.getElementById("captura").value.trim();
+
+
+  if (nombre === "") {
+    alert("Por favor, ingresa un nombre válido.");
+    return;
+  }
+
+
+  var tabla = document.getElementById("tabla");
+  var nuevaFila = tabla.insertRow(-1);
+  var celda0 = nuevaFila.insertCell(0);
+  var celda1 = nuevaFila.insertCell(1);
+  var celda2 = nuevaFila.insertCell(2);
+
+
+  celda0.textContent = contador++;
+  celda1.textContent = nombre;
+
+
+  var botonEliminar = document.createElement("button");
+  botonEliminar.textContent = "Eliminar";
+  botonEliminar.onclick = function() {
+    this.parentNode.parentNode.remove();
+    contador--;
+
+
+  };
+  celda2.appendChild(botonEliminar);
+
+
+  // Reiniciamos el campo de entrada
+  document.getElementById("captura").value = "";
+  document.getElementById("captura").focus();
+
+
+  // Store the entire table data in localStorage as a JSON string
+  localStorage.setItem('tablaData', JSON.stringify(tabla.innerHTML));
+ 
+}
+window.onload = function() {
+  // Retrieve the stored data and restore the table
+  let storedData = localStorage.getItem('tablaData');
+  if (storedData) {
+    document.getElementById("tabla").innerHTML = JSON.parse(storedData);
+    contador = document.getElementById("tabla").rows.length;
+    // Obtén todos los botones que contengan el texto "Eliminar"
+    // Obtén todos los botones
+    const botones = Array.from(document.querySelectorAll('button'));
+
+
+  // Filtra los botones que contienen el texto "Eliminar"
+  const botonesEliminar = botones.filter(boton => boton.textContent.includes('Eliminar'));
+
+
+  // Recorre cada botón y asigna la función al evento click
+  botonesEliminar.forEach(boton => {
+    boton.addEventListener('click', () => {
+      const fila = boton.parentNode.parentNode;
+      fila.parentNode.removeChild(fila);
+    });
+  });
+}
+}
+    </script>
+</body>
+</html>
