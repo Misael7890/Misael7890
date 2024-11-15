@@ -9,7 +9,9 @@ let CACHE_FILES = [
   'script.js',
   'cache-polyfill.js',
   'bootstrap.bundle.min.js',
+  'captura 1.png',
   'icon-144.png',
+  'captura 2.png',
 ];
 
 self.addEventListener('install', function (event) {
