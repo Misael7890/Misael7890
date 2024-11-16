@@ -13,12 +13,12 @@
     "screenshots": [
         {
            "src": "captura 1.png", 
-            "sizes": "640x960",
+            "sizes": "579x867",
             "type": "image/jpg"
         },
         {
            "src": "captura 2.png", 
-            "sizes": "1280x720",
+            "sizes": "620x499",
             "type": "image/jpg",
             "form_factor": "wide"
         }
